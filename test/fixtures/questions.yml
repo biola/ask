@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  form: 
+  type: 
+  name: MyString
+  instructions: MyText
+  required: false
+  position: 1
+
+two:
+  form: 
+  type: 
+  name: MyString
+  instructions: MyText
+  required: false
+  position: 1

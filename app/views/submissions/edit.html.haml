@@ -1,0 +1,5 @@
+%h2.name=@submission.form.name
+%p.instructions=@submission.form.instructions
+
+=form_for(@submission, :url=>form_submission_path(@submission.form.id, @submission.id)) do |f|
+  =render('form', :f=>f)

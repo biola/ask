@@ -1,0 +1,22 @@
+:ruby
+
+  csv = FasterCSV.generate do |csv_builder|
+  
+    csv_builder << ['Date','Submitted By'] + @form.questions.map(&:name)
+    
+    @submissions.each do |submission|
+    
+      row = []
+      row << submission.created_at.to_s(:long)
+      row << submission.submitter.to_s
+      submission.questions_with_answers.each do |q,a|
+        row << a.join(', ')
+      end
+      
+      csv_builder << row.map{ |cell| cell.to_s.strip }
+      
+    end
+    
+  end
+
+=raw csv

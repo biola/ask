@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  submission: 
+  question: 
+  choice: 
+  answer: MyText
+
+two:
+  submission: 
+  question: 
+  choice: 
+  answer: MyText

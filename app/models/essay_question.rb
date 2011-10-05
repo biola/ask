@@ -1,0 +1,3 @@
+class EssayQuestion < Question
+
+end

@@ -1,0 +1,48 @@
+-content_for(:head) do
+  =stylesheet_link_tag('forms')
+  =stylesheet_link_tag('submissions')
+
+%h2.name
+  =@form.name
+
+%p.instructions=@form.instructions
+
+%form(action="#")
+  -@form.questions.each do |question|
+    -last_question = Question.new
+    -if(question.rhetorical?)
+      %h3.section
+        =question.name
+      %p.section.instructions
+        =question.instructions
+    -else
+      -if question.name != last_question.name
+        %dt
+          =question_label(question)
+          =question_instructions(question)
+          -if question.required
+            %strong{:style=>"color:red;"} *
+      -case(question.type.to_sym)
+      -when :TextQuestion
+        %dd=text_field_tag(question.name.parameterize)
+      -when :EssayQuestion
+        %dd=text_area_tag(question.name.parameterize)
+      -when :ChooseOneQuestion
+        -if question.choices.count > 5
+          %dd=select_tag(question.name.parameterize, options_for_select((question.required ? [] : ['']) + question.choice_names))
+        -else
+          -question.choices.each do |choice|
+            %dd
+              =radio_button_tag(question.name.parameterize, choice.name)
+              =label_tag(question.name.parameterize, choice.name, :value=>choice.name)
+      -when :ChecklistQuestion
+        -question.choices.each do |choice|
+          %dd
+            =check_box_tag(question.name.parameterize, choice.name)
+            =label_tag(question.name.parameterize, choice.name)
+      
+    -last_question = question
+    
+  .buttons=submit_tag("Submit #{@form.class.to_s.titleize}", :disabled=>:disabled)
+
+=render('forms/show_aside')
