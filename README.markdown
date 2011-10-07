@@ -15,6 +15,8 @@ Add to your Gemfile:
 In your terminal run:
 
     bundle
+    rake ask_engine:install:migrations
+    rake db:migrate
 
 Usage
 -----
