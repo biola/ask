@@ -1,4 +1,4 @@
-module SubmissionsHelper
+module AskHelper
 
   def question_label(question, builder=nil)
     if question.type.to_sym == :ChecklistQuestion

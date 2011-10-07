@@ -37,5 +37,3 @@
         =a.check_box(:answer, {}, a.object.choice.try(:name), '')
         =a.label(:answer, a.object.choice.try(:name))
   -last_question = question
-    
-.buttons=f.submit("Submit #{@submission.form.class.to_s.titleize}")

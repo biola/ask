@@ -53,7 +53,7 @@ $(document).ready(function()
 
     var makeSortable = function()
     {
-        var questions = $("form.ask ul.questions");
+        var questions = $("form ul.ask.questions");
         questions.sortable(
         {
             stop: function(event, ui) 
@@ -81,7 +81,7 @@ $(document).ready(function()
   
     if(jQuery.fn.handleNesting) 
     {
-        $('form.ask ul.questions').handleNesting({
+        $('form ul.ask.questions').handleNesting({
                                                  afterAdd: function(added) 
                                                            {
                                                                handleChoiceNesting(added);
@@ -92,7 +92,7 @@ $(document).ready(function()
                                              });
     }
 
-    $('form.ask ul.questions').children('li').each(function(i,li) 
+    $('form ul.ask.questions').children('li').each(function(i,li) 
     {
         handleChoiceNesting(li);
     });

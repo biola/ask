@@ -1,0 +1,9 @@
+-answerer.all_questions.each do |question|
+  -if(question.rhetorical?)
+    %h3=question.name
+    %p=question.instructions
+  -else
+    %dt=question.name
+    -answerer.answers_to(question).each do |answer|
+      -unless answer.answer.blank?
+        %dd=answer.answer

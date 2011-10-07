@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  form: 
+  asker: 
   type: 
   name: MyString
   instructions: MyText
@@ -9,7 +9,7 @@ one:
   position: 1
 
 two:
-  form: 
+  asker: 
   type: 
   name: MyString
   instructions: MyText

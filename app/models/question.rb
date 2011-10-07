@@ -4,10 +4,10 @@ class Question < ActiveRecord::Base
 
   TYPES = ['TextQuestion', 'EssayQuestion', 'ChooseOneQuestion', 'ChecklistQuestion', 'FormSection']  
   
-  belongs_to :form
+  belongs_to :asker, :polymorphic => true
   has_many :choices, :dependent=>:destroy
 
-  acts_as_list :scope=>:form
+  acts_as_list :scope=>:asker
 
   attr_accessible :type, :name, :instructions, :required, :choices_attributes, :position
   accepts_nested_attributes_for :choices, :allow_destroy=>true, :reject_if=>lambda{|attrs| attrs['name'].blank? }

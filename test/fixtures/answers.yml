@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  submission: 
+  answerer: 
   question: 
   choice: 
   answer: MyText
 
 two:
-  submission: 
+  answerer: 
   question: 
   choice: 
   answer: MyText

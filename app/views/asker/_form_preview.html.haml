@@ -1,12 +1,3 @@
--content_for(:head) do
-  =stylesheet_link_tag('forms')
-  =stylesheet_link_tag('submissions')
-
-%h2.name
-  =@form.name
-
-%p.instructions=@form.instructions
-
 %form(action="#")
   -@form.questions.each do |question|
     -last_question = Question.new
@@ -42,7 +33,3 @@
             =label_tag(question.name.parameterize, choice.name)
       
     -last_question = question
-    
-  .buttons=submit_tag("Submit #{@form.class.to_s.titleize}", :disabled=>:disabled)
-
-=render('forms/show_aside')

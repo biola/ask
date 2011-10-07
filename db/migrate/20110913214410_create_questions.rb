@@ -1,7 +1,7 @@
 class CreateQuestions < ActiveRecord::Migration
   def change
     create_table :questions do |t|
-      t.belongs_to :form
+      t.belongs_to :asker, :polymorphic => true
       t.string :type
       t.string :name
       t.text :instructions
@@ -10,6 +10,6 @@ class CreateQuestions < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :questions, :form_id
+    add_index :questions, [:asker_id, :asker_type]
   end
 end
