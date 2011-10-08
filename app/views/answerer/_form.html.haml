@@ -9,11 +9,9 @@
   -else
     =a.hidden_field(:question_id, :value=>question.id)
     -if question.name != last_question.name
-      %dt
+      %dt{:class => question.required?? 'required' : nil}
         =question_label(question, a)
         =question_instructions(question)
-        -if question.required
-          %strong{:style=>"color:red;"} *
     -case(question.type.to_sym)
 
     -when :TextQuestion
