@@ -48,6 +48,8 @@
       added.find("input, select, textarea").each (i, el) ->
         $(el).val ""
         el.name = el.name.replace(match, replace)
+        
+      base.addRemoveButton added
       
       base.$el.append added
       base.options.afterAdd added  if base.options.afterAdd?
