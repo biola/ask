@@ -66,6 +66,16 @@ module Ask
         
         qa
       end
+      
+      private
+      
+      def validate_required_questions
+        event.questions.required.each do |question|
+          if answers.select{|a| a.question_id == question.id}.all?{|a| a.answer.blank?}
+            errors[:base] << "\"#{question.name}\" is required"
+          end
+        end
+      end
     end
     
   end
@@ -80,5 +90,7 @@ class ActiveRecord::Base
     
     attr_accessible :answers_attributes
     accepts_nested_attributes_for :answers, :allow_destroy=>true
+    
+    validate :validate_required_questions
   end
 end
