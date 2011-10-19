@@ -20,6 +20,25 @@ module Ask
         end
       end
 
+      def questions_by_section
+        section = nil
+        questions = {}
+        
+        asker.questions.order(:position).each do |question|
+          if question.is_a? FormSection
+            section = question
+          end
+          
+          questions[section] ||= []
+          
+          unless question.is_a? FormSection
+            questions[section] << question
+          end
+        end
+        
+        questions
+      end
+
       def answer_to(question)
         return nil if question.nil?
         if question.supports_multiple_answers?
