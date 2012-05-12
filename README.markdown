@@ -48,6 +48,17 @@ In your stylesheet manifest file add:
     *= require ask  
     */
 
+In your asker controller's `new` and `edit` methods you'll need to build the first question and choice. The best way to do this is create a private method:
+
+    def build_questions
+      @event.questions.build
+      @event.questions.each{|q| q.choices.build}
+    end
+
+Then at the top of your asker controller, include:
+
+    before_filter :build_questions, :only => [:new, :edit]
+
 In your answerer controller's `new` and `edit` methods you'll want to call `build_or_create_answers` and pass it in the appropriate questions. Such as:
 
     @event_registration.build_or_create_answers @event_registration.event.questions
