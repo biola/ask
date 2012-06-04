@@ -54,6 +54,15 @@
       base.$el.append added
       base.options.afterAdd added  if base.options.afterAdd?
       added.fadeIn "fast"
+      
+      # Temporary hack to fix the bug where choices don't 
+      #    display if you go back to edit the form and the 
+      #    last question was a choose one question.
+      added.find("dd.choices").css "height", "auto"
+      added.find("dd.choices").hide()
+      # Remove any extra choices field and just leave the first one
+      firstchoice = added.find("ul.choices").children().first()
+      added.find("ul.choices").html firstchoice
     
     base.remove = (item) ->
       li = $(item).closest("li")
