@@ -1,27 +1,5 @@
-%ul.ask.questions
-  =f.fields_for(:questions) do |question|
-    %li.question
-      %dl
-        .hidden.position-wrapper
-          =question.hidden_field(:position)
-        %dt.name=question.label(:name)
-        %dd.name=question.text_field(:name, :placeholder=>'Title')
-        %dt.instructions=question.label(:instructions)
-        %dd.instructions=question.text_area(:instructions, :placeholder=>'Instructions')
-        %dt.type=question.label(:type)
-        %dd.type=question.collection_select(:type, Question::TYPES, :to_s, :titleize)
-        %dt.required=question.label(:required)
-        %dd.required=question.select(:required, [['Optional', false], ['Required', true]])
-        -unless question.object.new_record?
-          %dt.delete=question.label(:_destroy, 'Delete')
-          %dd.delete=question.check_box(:_destroy)
-        %dt.choices
-        %dd.choices
-          %ul.choices
-            =question.fields_for(:choices) do |choice|
-              %li.choice
-                =choice.label(:name)
-                =choice.text_field(:name, :placeholder=>'Choice')
-                -unless choice.object.new_record?
-                  =choice.label(:_destroy, 'Remove')
-                  =choice.check_box(:_destroy)
+.ask.questions
+  =f.fields_for(:questions) do |f|
+    =render 'asker/question_fields', f: f
+
+  = link_to_add_fields "Add Question", f, :questions

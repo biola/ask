@@ -1,0 +1,33 @@
+%fieldset.question.preview
+  .question-action-links
+    =link_to 'Edit', '#', class: 'edit-question-link'
+    |
+    = f.hidden_field :_destroy
+    = link_to "Remove", '#', class: "remove_fields"
+  .hidden.position-wrapper
+    =f.hidden_field(:position)
+  .edit-question-fields
+    %table.question-details
+      %tbody
+        %tr
+          %th
+            %span.askwidget-fieldlabel=f.label(:name)
+          %td=f.text_field :name, class: 'askwidget-inputfield'
+        %tr
+          %th
+            %span.askwidget-fieldlabel= f.label(:instructions, 'Help Text')
+          %td=f.text_field :instructions, class: 'askwidget-inputfield'
+        %tr.select-question-type
+          %th
+            %span.askwidget-fieldlabel=f.label(:type)
+          %td=f.collection_select :type, Question::TYPES, :to_s, :titleize, class: 'askwidget-inputfield'
+
+
+    .edit-question-choices
+      =render 'asker/choices', f: f
+
+    .askwidget-buttons
+      =link_to "Done", "#", class: 'edit-question-link btn'
+      .required-option
+        =f.check_box :required, class: 'askwidget-inputfield'
+        %span.askwidget-fieldlabel=f.label(:required, "Make this a required question")

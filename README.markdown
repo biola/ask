@@ -5,6 +5,8 @@ Ask is a Rails engine that provides tools to simplify the process of letting you
 Requirements
 ------------
 - Rails 3.1 or higher
+- jQuery
+- jQuery UI
 
 Installation
 ------------
@@ -48,6 +50,7 @@ In your stylesheet manifest file add:
     *= require ask  
     */
 
+If you want your form to start with one question, you can do the following...
 In your asker controller's `new` and `edit` methods you'll need to build the first question and choice. The best way to do this is create a private method:
 
     def build_questions
@@ -58,8 +61,9 @@ In your asker controller's `new` and `edit` methods you'll need to build the fir
 Then at the top of your asker controller, include:
 
     before_filter :build_questions, :only => [:new, :edit]
+    # or you can call the build_questions method inside the new or edit controller
 
-In your answerer controller's `new` and `edit` methods you'll want to call `build_or_create_answers` and pass it in the appropriate questions. Such as:
+In your answerer controller's `new` and `edit` methods you'll need to call `build_or_create_answers` and pass it in the appropriate questions. Such as:
 
     @event_registration.build_or_create_answers @event_registration.event.questions
 
