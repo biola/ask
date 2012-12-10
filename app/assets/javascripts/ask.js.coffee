@@ -64,8 +64,7 @@ jQuery ->
     Toggle between 'edit' question and 'preview' question
   ###
   createQuestionPreview = (question) ->
-    if question.children('preview-question-fields').length == 0 # if we don't have a question preview yet
-      asker = question.serialize().match(/^\w+/)[0] # get asker name
+    if question.children('.preview-question-fields').length == 0 # if we don't have a question preview yet
       question_type = question.find('.select-question-type select').val() # get question type
       question_details = question.serializeObject(/^.*?\[\d+\]/)  # get question details and choices
 
@@ -129,7 +128,7 @@ jQuery ->
 
 
 jQuery.fn.serializeObject = (ignore_regex = null) ->
-  arrayData = @serializeArray()
+  arrayData = @.find("*").serializeArray()
   objectData = {}
 
   pushData = (node, hash_tail, value) ->
