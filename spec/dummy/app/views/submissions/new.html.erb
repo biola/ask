@@ -1,0 +1,11 @@
+<h1>New Submission</h1>
+
+<%= form_for [@form, @submission], :html=>{:class=>"form-horizontal"} do |f| %>
+  <fieldset>
+    <% # This partial is loaded from the ask gem %>
+    <%= render(:partial => 'answerer/form', :locals => { :f => f }) %>
+  </fieldset>
+  <div class="form-actions">
+    <%= f.submit 'Submit Form', :class=>"btn btn-primary" %>
+  </div>
+<% end %>

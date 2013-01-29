@@ -1,0 +1,12 @@
+%h2
+  =link_to "form", @submission.form
+
+%dl#submission-answers
+  -@submission.answers.group_by(&:question_id).each do |question_id, answers|
+    %dt=answers.first.question.name
+    %dd
+      -if answers.length > 1
+        -answer = answers.map{|a| a unless a.answer.blank? }.compact.join("\n")
+      -else
+        -answer = answers.first
+      =simple_format(answer.to_s)
