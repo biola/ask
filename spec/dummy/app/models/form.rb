@@ -5,4 +5,6 @@ class Form < ActiveRecord::Base
 
   acts_as_asker
 
+  validates_presence_of :title
+  
 end
