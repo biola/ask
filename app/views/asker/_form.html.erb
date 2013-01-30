@@ -1,0 +1,7 @@
+<div class = "ask questions">
+  <%= f.fields_for(:questions) do |f| %>
+    <%= render 'asker/question_fields', f: f %>
+  <% end %>
+
+  <%= link_to_add_fields "Add Question", f, :questions %>
+</div>
