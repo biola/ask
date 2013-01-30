@@ -1,0 +1,46 @@
+<fieldset class = "question preview">
+  <div class = "question-action-links">
+    <%= link_to 'Edit', '#', class: 'edit-question-link' %>
+    |
+    <%= f.hidden_field :_destroy %>
+    <%= link_to "Remove", '#', class: "remove_fields" %>
+  </div>
+  <div class = "hidden position-wrapper">
+    <%= f.hidden_field(:position) %>
+  </div>
+  <div class = "edit-question-fields">
+    <table class = "question-details">
+      <tbody>
+        <tr>
+          <th>
+            <span class = "askwidget-fieldlabel"><%= f.label(:name) %></span>
+          </th>
+          <td><%= f.text_field :name, class: 'askwidget-inputfield' %></td>
+        </tr>
+        <tr>
+          <th>
+            <span class = "askwidget-fieldlabel"><%= f.label(:instructions, 'Help Text') %></span>
+          </th>
+          <td><%= f.text_field :instructions, class: 'askwidget-inputfield' %></td>
+        </tr>
+        <tr class = "select-question-type">
+          <th>
+            <span class = "askwidget-fieldlabel"><%= f.label(:type) %></span>
+          </th>
+          <td><%= f.collection_select :type, Question::TYPES, :to_s, :titleize, class: 'askwidget-inputfield' %></td>
+    </table>
+
+
+    <div class = "edit-question-choices">
+      <%= render 'asker/choices', f: f %>
+    </div>
+
+    <div class = "askwidget-buttons">
+      <%= link_to "Done", "#", class: 'edit-question-link btn' %>
+      <div class = "required-option">
+        <%= f.check_box :required, class: 'askwidget-inputfield' %>
+        <span class = "askwidget-fieldlabel"><%= f.label(:required, "Make this a required question") %></span>
+      </div>
+    </div>
+  </div>
+</fieldset>

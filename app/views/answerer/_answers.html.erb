@@ -1,0 +1,18 @@
+<% raise 'You must pass in an "answerer" to use this partial' unless defined? %>
+  <%= answerer %>
+<% end %>
+
+<% answer.questions_by_section.each do |section, questions| %>
+  <% unless section.nil? %>
+    <h3><%= section.name %></h3>
+    <p><%= section.instructions %></p>
+  <% end %>
+  <dl>
+    <% questions.each do |question| %>
+      <dt><%= question.name %></dt>
+      <% answer.answers_to(question).each do |answer| %>
+        <dd><%= answer.answer %></dd>
+      <% end %>
+    <% end %>
+  </dl>
+<% end %>
