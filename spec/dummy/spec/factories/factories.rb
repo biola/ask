@@ -37,8 +37,8 @@ FactoryGirl.define do
   factory :question do
     association :asker, factory: :form
     type "TextQuestion"
-    name "What is your name?"
-    instructions "Please type quickly"
+    name Faker::Lorem.sentence(5)
+    instructions Faker::Lorem.sentence(5)
     required false
     sequence(:position) {|n| n }
 

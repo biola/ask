@@ -15,7 +15,7 @@ describe Submission do
     it "has a valid factory" do
       submission = create(:submission_with_answers)
       expect(submission).to be_valid
-      expect(submission.answers.count).to eq(3)
+      expect(submission.answers.count).to eq 3
     end
   end
 end
