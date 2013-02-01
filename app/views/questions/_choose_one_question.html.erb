@@ -1,0 +1,10 @@
+<% if question.choices.count > 5 %>
+  <dd><%= answer.collection_select(:answer, question.choice_names, :to_s, :to_s, :include_blank=>!question.required)%></dd>
+<% else %>
+  <% question.choices.each do |choice| %>
+    <dd>
+      <%=answer.radio_button(:answer, choice.name) %>
+      <%=answer.label(:answer, choice.name, :value=>choice.name) %>
+    </dd>
+  <% end %>
+<% end %>

@@ -25,6 +25,7 @@ class Question < ActiveRecord::Base
     default
   end
 
+  # This just means it doesn't expect an answer, such as a form_section question
   def rhetorical?
     false
   end
