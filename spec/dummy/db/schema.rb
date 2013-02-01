@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130129190827) do
+ActiveRecord::Schema.define(:version => 20121130223752) do
 
   create_table "answers", :force => true do |t|
     t.integer  "answerer_id"
@@ -21,8 +21,6 @@ ActiveRecord::Schema.define(:version => 20130129190827) do
     t.text     "answer"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.text     "properties"
-    t.string   "type"
   end
 
   add_index "answers", ["answerer_id", "answerer_type"], :name => "index_answers_on_answerer_id_and_answerer_type"

@@ -37,27 +37,28 @@ FactoryGirl.define do
   factory :question do
     association :asker, factory: :form
     type "TextQuestion"
-    name Faker::Lorem.sentence(5)
+    sequence(:name) {|n| "Question #{n}"}
     instructions Faker::Lorem.sentence(5)
     required false
     sequence(:position) {|n| n }
 
-    factory :text_question do
+    factory :text_question, class: "TextQuestion" do
       type "TextQuestion"
     end
-    factory :essay_question do
+    factory :essay_question, class: "EssayQuestion" do
       type "EssayQuestion"
     end
-    factory :choose_one_question do
+    factory :choose_one_question, class: "ChooseOneQuestion" do
       type "ChooseOneQuestion"
       after(:build) do |choose_one_question|
         choose_one_question.choices << build_list(:choice, 3, question: choose_one_question)
       end
     end
-    factory :checklist_question do
+    factory :checklist_question, class: "ChecklistQuestion" do
       type "ChecklistQuestion"
-      after(:build) do |choose_one_question|
-        choose_one_question.choices << build_list(:choice, 3, question: choose_one_question)
+      
+      after(:build) do |checklist_question|
+        checklist_question.choices << build_list(:choice, 3, question: checklist_question)
       end
     end
   end
@@ -78,14 +79,8 @@ FactoryGirl.define do
     factory :essay_answer do
     end
     factory :choose_one_answer do
-      after(:build) do |choose_one_answer|
-        choose_one_answer.choices << build_list(:choice, 3, answer: choose_one_answer)
-      end
     end
     factory :checklist_answer do
-      after(:build) do |choose_one_answer|
-        choose_one_answer.choices << build_list(:choice, 3, answer: choose_one_answer)
-      end
     end
   end
 end
