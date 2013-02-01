@@ -1,0 +1,7 @@
+<fieldset class = "choice">
+  <input type = "radio" disabled = "disabled" class = "radio-preview"></input>
+  <input type = "checkbox" disabled = "disabled" class = "checkbox-preview"></input>
+  <%= f.text_field :name, :placeholder=>'Choice' %>
+  <%= f.hidden_field :_destroy %>
+  <%= link_to "remove", '#', class: "remove_fields" %>
+</fieldset>

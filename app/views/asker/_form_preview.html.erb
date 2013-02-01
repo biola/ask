@@ -1,0 +1,54 @@
+<% form(action="#") %>
+  <% @form.questions.each do |question| %>
+    <% last_question = Question.new %>
+    <% if(question.rhetorical?) %>
+      <h3 class = "section">
+        <%= question.name %>
+      </h3>
+      <p class = "section instructions">
+        <%= question.instructions %>
+      </p>
+    <% else %>
+      <% if question.name != last_question.name %>
+        <dt>
+          <%= question_label(question) %>
+          <%= question_instructions(question) %>
+          <% if question.required %>
+            <strong style= "color:red;"> * </strong>
+          <% end %>
+        </dt>
+      <% end %>
+
+      <% case(question.type.to_sym)
+
+      when :TextQuestion %>
+        <dd><%= text_field_tag(question.name.parameterize) %></dd>
+
+      <% when :EssayQuestion %>
+        <dd><%= text_area_tag(question.name.parameterize) %></dd>
+
+      <% when :ChooseOneQuestion %>
+        <% if question.choices.count > 5 %>
+          <dd><%= select_tag(question.name.parameterize, options_for_select((question.required ? [] : ['']) + question.choice_names)) %></dd>
+        <% else %>
+          <% question.choices.each do |choice| %>
+            <dd>
+              =radio_button_tag(question.name.parameterize, choice.name)
+              =label_tag(question.name.parameterize, choice.name, :value=>choice.name)
+            </dd>
+          <% end %>
+        <% end %>
+
+      <% when :ChecklistQuestion %>
+        <% question.choices.each do |choice| %>
+          <dd>
+            <%= check_box_tag(question.name.parameterize, choice.name) %>
+            <%= label_tag(question.name.parameterize, choice.name) %>
+          </dd>
+        <% end %>
+      <% end %>
+    <% end %>
+      
+    <% last_question = question %>
+  <% end %>
+<% end %>
