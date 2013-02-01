@@ -1,0 +1,53 @@
+
+<% last_question = Question.new %>
+<%= f.fields_for(:answers) do |a| %>
+  <% question = a.object.question %>
+  <% if(question.rhetorical?) %>
+    <h3 class = "section">
+      <%= question.name %>
+    </h3>
+    <p class = "section instructions">
+      <%= question.instructions %>
+    </p>
+  <% else %>
+    <%= a.hidden_field(:question_id, :value=>question.id) %>
+    <% if question.name != last_question.name %>
+      <dt class = "<%= question.required? ? 'required' : nil %>">
+        <%= question_label(question, a) %>
+        <%= question_instructions(question) %>
+      </dt>
+    <% end %>
+    <% case(question.type.to_sym)
+
+    when :TextQuestion %>
+      <dd><%= a.text_field(:answer) %></dd>
+
+    <% when :EssayQuestion %>
+      <dd><%= a.text_area(:answer) %></dd>
+
+    <% when :ChooseOneQuestion %>
+      <% if question.choices.count > 5 %>
+        <dd><%= a.collection_select(:answer, question.choice_names, :to_s, :to_s, :include_blank=>!question.required) %></dd>
+      <% else %>
+        <% question.choices.each do |choice| %>
+          <dd>
+            <%= a.radio_button(:answer, choice.name) %>
+            <%= a.label(:answer, choice.name, :value=>choice.name) %>
+          </dd>
+        <% end %>
+      <% end %>
+      
+    <% when :ChecklistQuestion %>
+      <dd>
+        <%= a.hidden_field(:choice_id, :value=>a.object.choice_id) %>
+        <%= a.check_box(:answer, {}, a.object.choice.try(:name), '') %>
+        <%= a.label(:answer, a.object.choice.try(:name)) %>
+      </dd>
+    <% end %>
+
+
+
+  <% end %>
+
+  <% last_question = question %>
+<% end %>
