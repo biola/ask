@@ -76,11 +76,11 @@ module Ask
         
         # Set the correct order and make sure we have all the questions
         all_questions.each do |q|
-          qa[q.name] = []
+          qa[q.id] = []
         end
         
         answers.each do |a|
-          qa[a.question.name] << a.answer.to_s.strip unless a.answer.blank?
+          qa[a.question.id] << a.answer.to_s.strip unless a.answer.blank?
         end
         
         qa
