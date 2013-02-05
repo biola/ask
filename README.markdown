@@ -76,6 +76,16 @@ Finally you'll need to define an `asker` method on your answerer model, like so:
       end
     end
 
+
+Configuration
+-------------
+If you want to changed the default whitelisted file types for upload questions, just drop this into an initializer file.
+
+    Ask.configure do |config|
+      @upload_whitelist = %w(jpg jpeg gif png doc docx txt pdf xls xlsx zip)
+    end
+
+
 License
 -------
 MIT License
