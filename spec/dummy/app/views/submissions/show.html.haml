@@ -1,16 +1,4 @@
 %h2
   =link_to "form", @submission.form
 
-%dl#submission-answers
-  -@submission.answers.group_by(&:question_id).each do |question_id, answers|
-    %dt=answers.first.question.name
-    %dd
-      -if answers.length > 1
-        -answer = answers.map{|a| a unless a.answer.blank? }.compact.join("\n")
-      -else
-        -answer = answers.first
-
-      -if answer.is_a?(Answer) && answer.question.supports_uploads? && !answer.uploaded_file.blank?
-        %p=link_to answer.to_s, answer.uploaded_file.url, target: "_blank"
-      -else
-        =simple_format(answer.to_s)
+=render 'answerer/answers', answerer: @submission

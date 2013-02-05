@@ -1,8 +1,6 @@
-<% raise 'You must pass in an "answerer" to use this partial' unless defined? %>
-  <%= answerer %>
-<% end %>
+<% raise 'You must pass in an "answerer" to use this partial' unless defined?(answerer) %>
 
-<% answer.questions_by_section.each do |section, questions| %>
+<% answerer.questions_by_section.each do |section, questions| %>
   <% unless section.nil? %>
     <h3><%= section.name %></h3>
     <p><%= section.instructions %></p>
@@ -10,8 +8,14 @@
   <dl>
     <% questions.each do |question| %>
       <dt><%= question.name %></dt>
-      <% answer.answers_to(question).each do |answer| %>
-        <dd><%= answer.answer %></dd>
+      <% answerer.answers_to(question).each do |answer| %>
+        <dd>
+          <% if answer.is_a?(Answer) && answer.question.supports_uploads? && !answer.uploaded_file.blank? %>
+            <%= link_to answer.to_s, answer.uploaded_file.url, target: "_blank" %>
+          <% else %>
+            <%= simple_format(answer.to_s) %>
+          <% end %>
+        </dd>
       <% end %>
     <% end %>
   </dl>
