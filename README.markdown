@@ -7,6 +7,10 @@ Requirements
 - Rails 3.1 or higher
 - jQuery
 - jQuery UI
+- Uses Carrierwave for uploads
+
+More information will be on the [wiki](https://github.com/biola/ask/wiki).
+
 
 Installation
 ------------
