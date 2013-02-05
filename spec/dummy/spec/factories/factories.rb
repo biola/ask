@@ -61,6 +61,9 @@ FactoryGirl.define do
         checklist_question.choices << build_list(:choice, 3, question: checklist_question)
       end
     end
+    factory :upload_question, class: "UploadQuestion" do
+      type "UploadQuestion"
+    end
   end
 
   factory :choice do
@@ -72,15 +75,23 @@ FactoryGirl.define do
     association :answerer, factory: :submission
     association :question
     answer "Sir Aurthor of Camelot"
-    # Note: type gets set automatically before save based on the question type.
 
     factory :text_answer do
+      association :question, factory: :text_question
     end
     factory :essay_answer do
+      association :question, factory: :essay_question
     end
     factory :choose_one_answer do
+      association :question, factory: :choose_one_question
     end
     factory :checklist_answer do
+      association :question, factory: :checklist_question
+    end
+    factory :upload_answer do
+      association :question, factory: :upload_question
+      answer nil
+      uploaded_file { File.open(File.join(Rails.root, 'spec', 'support', 'files', 'avatar.jpeg')) }
     end
   end
 end
