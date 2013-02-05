@@ -83,6 +83,9 @@ jQuery ->
         when "EssayQuestion"
           preview_section.append(q_label).append("<textarea></textarea>")
           preview_section.append(q_help_text) if q_help_text
+        when "UploadQuestion"
+          preview_section.append(q_label).append("<input type='file'>")
+          preview_section.append(q_help_text) if q_help_text
         when "ChooseOneQuestion"
           preview_section.append(q_label)
           preview_section.append(q_help_text) if q_help_text

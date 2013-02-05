@@ -90,7 +90,7 @@ module Ask
       
       def validate_required_questions
         asker.questions.required.each do |question|
-          if answers.select{|a| a.question_id == question.id}.all?{|a| a.answer.blank?}
+          if answers.select{|a| a.question_id == question.id}.all?{|a| a.fails_required?}
             errors[:base] << "\"#{question.name}\" is required"
           end
         end

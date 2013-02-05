@@ -13,3 +13,8 @@
  *= require_tree .
  */
 
+.flash_error {
+  background: rgb(238, 220, 220);
+  padding: 3px 8px;
+  margin-bottom: 3px;
+}

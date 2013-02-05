@@ -17,7 +17,7 @@
     &.preview {   // hide edit fields when in preview mode
       .edit-question-fields { display: none; }
       input[type="checkbox"], input[type="radio"] { margin: 0 8px 4px; }
-      label.preview-question-name { font-weight: bold; }
+      label.preview-question-name { font-weight: bold; display: block; }
       h3 { margin-bottom: 0; }
       hr { margin-bottom: 0; border-top: 1px solid #EEE; border-bottom: none; }
       .help-block { color: #595959; }

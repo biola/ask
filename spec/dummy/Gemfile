@@ -9,6 +9,7 @@ gem 'ask', path: '../../../ask'
 
 gem 'sqlite3'
 gem 'haml'
+gem 'carrierwave'
 
 group :development, :test do
   gem 'pry'

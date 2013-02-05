@@ -9,4 +9,8 @@
         -answer = answers.map{|a| a unless a.answer.blank? }.compact.join("\n")
       -else
         -answer = answers.first
-      =simple_format(answer.to_s)
+
+      -if answer.is_a?(Answer) && answer.question.supports_uploads? && !answer.uploaded_file.blank?
+        %p=link_to answer.to_s, answer.uploaded_file.url, target: "_blank"
+      -else
+        =simple_format(answer.to_s)

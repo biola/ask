@@ -10,12 +10,10 @@ class FormsController < ApplicationController
 
   def new
     @form = Form.new
-    build_questions
   end
 
   def edit
     @form = Form.find(params[:id])
-    build_questions
   end
 
   def create
@@ -45,10 +43,4 @@ class FormsController < ApplicationController
     redirect_to forms_url
   end
 
-  private
-
-  def build_questions
-    @form.questions.build
-    @form.questions.each{|q| q.choices.build}
-  end
 end

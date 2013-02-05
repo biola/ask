@@ -2,7 +2,7 @@ class Question < ActiveRecord::Base
 
   require 'acts_as_list'
 
-  TYPES = ['TextQuestion', 'EssayQuestion', 'ChooseOneQuestion', 'ChecklistQuestion', 'FormSection']  
+  TYPES = ['TextQuestion', 'EssayQuestion', 'ChooseOneQuestion', 'ChecklistQuestion', 'UploadQuestion', 'FormSection']  
   
   belongs_to :asker, :polymorphic => true
   has_many :choices, :dependent => :destroy
@@ -40,6 +40,10 @@ class Question < ActiveRecord::Base
   end
 
   def supports_multiple_answers?
+    false
+  end
+
+  def supports_uploads?
     false
   end
 
