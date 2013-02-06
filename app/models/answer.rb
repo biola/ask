@@ -10,7 +10,7 @@ class Answer < ActiveRecord::Base
 
   mount_uploader :uploaded_file, UploadedFileUploader
 
-  default_scope joins(:question).order('questions.position')
+  default_scope joins(:question).order('questions.position').readonly(false)  # This scope prevents updating answers unless readonly is set to false.
   scope :for_answerer, lambda{|answerer| where(:answerer_type => answerer.class.to_s, :answerer_id => answerer.id)}
   scope :for_question, lambda{|question| where(:question_id => question.id)}
 
