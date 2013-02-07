@@ -1,4 +1,6 @@
 %h2
   =link_to "form", @submission.form
+  =" / "
+  =link_to "submissions", form_submissions_path(@submission.form)
 
 =render 'answerer/answers', answerer: @submission

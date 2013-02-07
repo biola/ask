@@ -1,8 +1,8 @@
 class SubmissionsController < ApplicationController
   
   def index
-    @forms = Form.find(params[:form_id])
-    @submissions = @forms.submissions
+    @form = Form.find(params[:form_id])
+    @submissions = @form.submissions
   end
 
   def show
