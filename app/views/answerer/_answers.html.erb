@@ -11,7 +11,7 @@
       <% answerer.answers_to(question).each do |answer| %>
         <dd>
           <% if answer.is_a?(Answer) && answer.question.supports_uploads? && !answer.uploaded_file.blank? %>
-            <%= link_to answer.to_s, answer.uploaded_file.url, target: "_blank" %>
+            <%= link_to asset_path(answer.uploaded_file_url), asset_path(answer.uploaded_file_url), target: "_blank" %>
           <% else %>
             <%= simple_format(answer.to_s) %>
           <% end %>
