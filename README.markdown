@@ -90,6 +90,11 @@ If you want to changed the default whitelisted file types for upload questions, 
     end
 
 
+Build Status
+------------
+[![Build Status](https://travis-ci.org/biola/ask.png)](https://travis-ci.org/biola/ask)
+
+
 License
 -------
 MIT License
