@@ -1,0 +1,34 @@
+<% @prev_question_id == nil %>
+<%= f.fields_for(:answers) do |answer| %>
+  
+  <% question = answer.object.question %>
+  <%= answer.hidden_field(:question_id, value: question.id) %>
+
+  <% if question.rhetorical?  # aka, it does not need to be answered %>
+    <% case(question.type.to_sym) %>
+    <% when :FormSection %>
+      <%= render 'questions/form_section', answer: answer, question: question %>
+    <% end %>
+
+  <% else %>
+    <% if question.supports_multiple_answers? && (@prev_question_id == question.id) %>
+      <% # Don't redisplay the label again for each checklist choice, just display it the first time %>
+    <% else %>
+      <%= render 'questions/label', answer: answer, question: question %>
+      <% @prev_question_id = question.id %>
+    <% end %>
+
+    <% case(question.type.to_sym) %>
+    <% when :TextQuestion %>
+      <%= render 'questions/text_question', answer: answer, question: question %>
+    <% when :EssayQuestion %>
+      <%= render 'questions/essay_question', answer: answer, question: question %>
+    <% when :UploadQuestion %>
+      <%= render 'questions/upload_question', answer: answer, question: question %>
+    <% when :ChooseOneQuestion %>
+      <%= render 'questions/choose_one_question', answer: answer, question: question %>
+    <% when :ChecklistQuestion %>
+      <%= render 'questions/checklist_question', answer: answer, question: question %>
+    <% end %>
+  <% end %>
+<% end %>

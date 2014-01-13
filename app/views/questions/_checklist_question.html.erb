@@ -1,0 +1,5 @@
+<dd>
+  <%= answer.hidden_field(:choice_id, :value=>answer.object.choice_id) %>
+  <%= answer.check_box(:answer, {}, answer.object.choice.try(:name), '') %>
+  <%= answer.label(:answer, answer.object.choice.try(:name)) %>
+</dd>

@@ -1,0 +1,7 @@
+<h1>Form submissions Index page</h1>
+
+<ul>
+  <% @submissions.each do |submission| %>
+    <li><%= link_to submission.id, [@form, submission] %></li>
+  <% end %>
+</ul>

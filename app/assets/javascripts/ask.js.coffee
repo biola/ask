@@ -34,9 +34,10 @@ jQuery ->
       question.find('.required-option').hide()
   
   # Update preview type whenever the user changes the type of this question
+  $('form').on "change", ".select-question-type select", ->
+    updateChoiceVisibility $(this)
+  
   bindTypeChange = (select) ->
-    select.live "change", ->
-      updateChoiceVisibility $(this)
 
   # Update once when the DOM first loads
   selects = $(".select-question-type select")
@@ -82,6 +83,9 @@ jQuery ->
         when "EssayQuestion"
           preview_section.append(q_label).append("<textarea></textarea>")
           preview_section.append(q_help_text) if q_help_text
+        when "UploadQuestion"
+          preview_section.append(q_label).append("<input type='file'>")
+          preview_section.append(q_help_text) if q_help_text
         when "ChooseOneQuestion"
           preview_section.append(q_label)
           preview_section.append(q_help_text) if q_help_text
@@ -122,7 +126,7 @@ jQuery ->
   $('fieldset.question').each ->
     createQuestionPreview $(this)
 
-  $('a.edit-question-link').live "click", (e) ->
+  $('form').on "click", "a.edit-question-link", (e) ->
     toggleEditMode($(this).closest('fieldset.question'))
     e.preventDefault()
 

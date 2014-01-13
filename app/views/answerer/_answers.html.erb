@@ -1,0 +1,22 @@
+<% raise 'You must pass in an "answerer" to use this partial' unless defined?(answerer) %>
+
+<% answerer.questions_by_section.each do |section, questions| %>
+  <% unless section.nil? %>
+    <h3><%= section.name %></h3>
+    <p><%= section.instructions %></p>
+  <% end %>
+  <dl>
+    <% questions.each do |question| %>
+      <dt><%= question.name %></dt>
+      <% answerer.answers_to(question).each do |answer| %>
+        <dd>
+          <% if answer.is_a?(Answer) && answer.question.supports_uploads? && !answer.uploaded_file.blank? %>
+            <%= link_to asset_path(answer.uploaded_file_url), asset_path(answer.uploaded_file_url), target: "_blank" %>
+          <% else %>
+            <%= simple_format(answer.to_s) %>
+          <% end %>
+        </dd>
+      <% end %>
+    <% end %>
+  </dl>
+<% end %>

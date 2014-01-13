@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @form.title %>
+</p>
+
+<p>
+<%= link_to "Fill Out Form", new_form_submission_path(@form) %>
+|
+<%= link_to "See Form Submissions", form_submissions_path(@form) %>
+<p>
+
+<%= link_to 'Edit', edit_form_path(@form) %> |
+<%= link_to 'Back', forms_path %>

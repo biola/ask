@@ -1,0 +1,27 @@
+<div class = "question-type TextQuestion">
+  <input type = "text" disabled = "disabled" name = "undefined" value = "Their answer" class = "askwidget-disabledpreview"></input>
+</div>
+
+<div class = "question-type EssayQuestion start-hidden">
+  <textarea disabled = "disabled" name = "undefined" type = "text" value = "Their answer" class = "askwidget-disabledpreview"></textarea>
+</div>
+
+<div class = "question-type UploadQuestion  start-hidden">
+  <input type = "file" disabled = "disabled" name = "undefined" value = "Their answer" class = "askwidget-disabledpreview"></input>
+</div>
+
+<div class = "question-type ChooseOneQuestion ChecklistQuestion start-hidden">
+  <%= f.fields_for(:choices) do |choice| %>
+    <%= render 'asker/choice_fields', f: choice %>
+  <% end %>
+
+  <%= link_to_add_fields "Add Choice", f, :choices %>
+</div>
+
+<div class = "question-type FormSection start-hidden">
+  <h4> Name of section </h4>
+  <p>
+    This will provide a divider between form sections
+  </p>
+</div>
+

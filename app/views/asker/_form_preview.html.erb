@@ -1,0 +1,11 @@
+<% raise 'You must pass in a "answerer" to use this partial' unless defined?(answerer) %>
+
+<%= form_for answerer, url: "#", html: {class: "form-horizontal form-preview"} do |f| %>
+  <fieldset>
+    <% # This partial is loaded from the ask gem %>
+    <%= render(partial: 'answerer/form', locals: { f: f }) %>
+  </fieldset>
+  <div class="form-actions">
+    <%= f.submit 'Submit Form', class: "btn btn-primary disabled", disabled: :disabled %>
+  </div>
+<% end %>

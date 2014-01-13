@@ -18,10 +18,11 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency 'rails', '>= 3.1.0'
-  s.add_dependency 'haml', '>= 3.0.0'
   s.add_dependency 'acts_as_list', '>= 0.1.2'
   s.add_dependency 'rails_autolink', '>=1.0.2'
   s.add_dependency 'jquery-rails'
+  s.add_dependency 'carrierwave', '>= 0.8.0'
 
   s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'rspec-rails'
 end

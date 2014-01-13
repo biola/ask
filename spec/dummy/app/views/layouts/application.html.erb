@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TestAsk</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <% all_messages.each do |error| %>
+    <%= content_tag :div, error[:message], class: "flash_#{error[:type]}" %>
+  <% end %>
+
+  <%= yield %>
+
+</body>
+</html>

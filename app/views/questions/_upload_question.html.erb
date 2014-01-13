@@ -1,0 +1,6 @@
+<dd>
+  <%= answer.file_field(:uploaded_file) %>
+  <%= answer.hidden_field :uploaded_file_cache %>
+  <br>
+  <%= answer.object.uploaded_file.to_s unless answer.object.uploaded_file.nil? %>
+</dd>

@@ -7,6 +7,10 @@ Requirements
 - Rails 3.1 or higher
 - jQuery
 - jQuery UI
+- Uses Carrierwave for uploads
+
+More information will be on the [wiki](https://github.com/biola/ask/wiki).
+
 
 Installation
 ------------
@@ -75,6 +79,21 @@ Finally you'll need to define an `asker` method on your answerer model, like so:
         return event  
       end
     end
+
+
+Configuration
+-------------
+If you want to changed the default whitelisted file types for upload questions, just drop this into an initializer file.
+
+    Ask.configure do |config|
+      @upload_whitelist = %w(jpg jpeg gif png doc docx txt pdf xls xlsx zip)
+    end
+
+
+Build Status
+------------
+[![Build Status](https://travis-ci.org/biola/ask.png)](https://travis-ci.org/biola/ask)
+
 
 License
 -------
