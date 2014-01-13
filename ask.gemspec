@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/biola/ask'
   s.summary     = 'End-user form creation engine for Rails'
   s.description = "Allow your site's maintainers to easily create forms."
+  s.license     = 'MIT'
 
   s.files = Dir["{app,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.markdown"]
   s.test_files = Dir["test/**/*"]
