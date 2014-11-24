@@ -1,6 +1,5 @@
 module Ask
   module ActiveRecord
-    
     module InstanceMethods
       def all_questions
         if respond_to? :asker
@@ -9,7 +8,7 @@ module Ask
           raise NoMethodError, "You must define a #{self}#asker method that returns the related acts_as_asker model"
         end
       end
-    
+
       def find_question(question)
         if question.is_a? Question
           question
@@ -23,19 +22,19 @@ module Ask
       def questions_by_section
         section = nil
         questions = {}
-        
+
         asker.questions.order(:position).each do |question|
           if question.is_a? FormSection
             section = question
           end
-          
+
           questions[section] ||= []
-          
+
           unless question.is_a? FormSection
             questions[section] << question
           end
         end
-        
+
         questions
       end
 
@@ -52,13 +51,12 @@ module Ask
         return nil if question.nil?
         answers.for_question(question)
       end
-      
+
       def build_or_create_answers(questions)
         method = new_record? ? :build : :create
-        
+
         questions.each do |question|
           if answers_to(question).empty?
-          
             if question.supports_multiple_answers?
               question.choices.each do |choice|
                 answers.send(method, :question_id=>question.id, :answer=>'', :choice_id=>choice.id)
@@ -66,28 +64,27 @@ module Ask
             else
               answers.send(method, :question_id=>question.id)
             end
-            
           end
         end
       end
-      
+
       def questions_with_answers
         qa = ActiveSupport::OrderedHash.new
-        
+
         # Set the correct order and make sure we have all the questions
         all_questions.each do |q|
           qa[q.id] = []
         end
-        
+
         answers.each do |a|
           qa[a.question.id] << a.answer.to_s.strip unless a.answer.blank?
         end
-        
+
         qa
       end
-      
+
       private
-      
+
       def validate_required_questions
         return if asker.blank?
         asker.questions.required.each do |question|
@@ -97,20 +94,21 @@ module Ask
         end
       end
     end
-    
   end
 end
 
 class ActiveRecord::Base
   def self.acts_as_answerer
     include Ask::ActiveRecord::InstanceMethods
-    
+
     has_many :answers, :as => :answerer, :dependent=>:destroy
     has_many :questions, :through=>:answers
-    
-    attr_accessible :answers_attributes
+
+    if respond_to? :attr_accessible # Rails 3.2 backwards compatibility
+      attr_accessible :answers_attributes
+    end
     accepts_nested_attributes_for :answers, :allow_destroy=>true
-    
+
     validate :validate_required_questions
   end
 end

@@ -2,6 +2,7 @@ require "ask/engine"
 require "ask/acts_as_asker"
 require "ask/acts_as_answerer"
 require "carrierwave"
+require "acts_as_list"
 
 module Ask
   require 'ask/configuration'
