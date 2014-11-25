@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SubmissionsController do
+describe SubmissionsController, type: :controller do
 
   before(:each) do
     @submission = create(:submission_with_answers)
@@ -112,13 +112,11 @@ describe SubmissionsController do
         put :update, id: @submission, form_id: @form, submission: @submission_attributes
         expect(response).to render_template :edit
       end
-      it "throws a Mass Assignment error if trying to update questions" do
+      it "does not let you update questions" do
         @question = @answer_to_update.question
         question_attributes = {"questions_attributes"=>{"0"=>{"id"=>@question.id, "name"=>"What is blue?"}}}
-        expect{
-          put :update, id: @submission, form_id: @form, submission: question_attributes
-          @answer_to_update.reload
-        }.to raise_error
+        put :update, id: @submission, form_id: @form, submission: question_attributes
+        @answer_to_update.reload
         expect(@question.name).not_to eql "What is blue?"
       end
     end

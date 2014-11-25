@@ -14,23 +14,23 @@ describe Answer do
     answer = create(:answer, answer: "")
     answer.question.required = true
     expect(answer).to be_valid
-    expect(answer.fails_required?).to be_true
+    expect(answer.fails_required?).to be_truthy
 
     upload_answer = create(:upload_answer, uploaded_file: "")
     upload_answer.question.required = true
     expect(upload_answer).to be_valid
-    expect(upload_answer.fails_required?).to be_true
+    expect(upload_answer.fails_required?).to be_truthy
   end
 
   it "correctly passes when required and answered" do
     answer = create(:answer)
     answer.question.required = true
     expect(answer).to be_valid
-    expect(answer.fails_required?).to be_false
+    expect(answer.fails_required?).to be_falsey
 
     upload_answer = create(:upload_answer)
     upload_answer.question.required = true
     expect(upload_answer).to be_valid
-    expect(upload_answer.fails_required?).to be_false
+    expect(upload_answer.fails_required?).to be_falsey
   end
 end

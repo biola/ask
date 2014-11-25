@@ -1,7 +1,7 @@
 class Question < ActiveRecord::Base
   require 'acts_as_list'
 
-  TYPES = ['TextQuestion', 'EssayQuestion', 'ChooseOneQuestion', 'ChecklistQuestion', 'UploadQuestion', 'FormSection']  
+  TYPES = ['TextQuestion', 'EssayQuestion', 'ChooseOneQuestion', 'ChecklistQuestion', 'UploadQuestion', 'FormSection']
 
   belongs_to :asker, :polymorphic => true
   has_many :choices, :dependent => :destroy
@@ -18,7 +18,7 @@ class Question < ActiveRecord::Base
   validates_inclusion_of :type, :in=>TYPES
 
   default_scope lambda { {:order => :position} }
-  scope :required, where(:required => true)
+  scope :required, -> { where(:required => true) }
 
   def attributes_protected_by_default
     default = [ self.class.primary_key ]
