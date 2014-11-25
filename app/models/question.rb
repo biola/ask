@@ -17,7 +17,7 @@ class Question < ActiveRecord::Base
   validates_presence_of :type, :name
   validates_inclusion_of :type, :in=>TYPES
 
-  default_scope lambda { {:order => :position} }
+  default_scope lambda { order(:position) }
   scope :required, -> { where(:required => true) }
 
   def attributes_protected_by_default
