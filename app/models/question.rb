@@ -1,23 +1,24 @@
 class Question < ActiveRecord::Base
-
   require 'acts_as_list'
 
-  TYPES = ['TextQuestion', 'EssayQuestion', 'ChooseOneQuestion', 'ChecklistQuestion', 'UploadQuestion', 'FormSection']  
-  
+  TYPES = ['TextQuestion', 'EssayQuestion', 'ChooseOneQuestion', 'ChecklistQuestion', 'UploadQuestion', 'FormSection']
+
   belongs_to :asker, :polymorphic => true
   has_many :choices, :dependent => :destroy
   has_many :answers, :dependent => :destroy
 
   acts_as_list :scope=>:asker
 
-  attr_accessible :type, :name, :instructions, :required, :choices_attributes, :position
+  if respond_to? :attr_accessible # Rails 3.2 backwards compatibility
+    attr_accessible :type, :name, :instructions, :required, :choices_attributes, :position
+  end
   accepts_nested_attributes_for :choices, :allow_destroy=>true, :reject_if=>lambda{|attrs| attrs['name'].blank? }
 
   validates_presence_of :type, :name
   validates_inclusion_of :type, :in=>TYPES
 
-  default_scope :order => :position
-  scope :required, where(:required => true)
+  default_scope lambda { order(:position) }
+  scope :required, -> { where(:required => true) }
 
   def attributes_protected_by_default
     default = [ self.class.primary_key ]
@@ -46,5 +47,4 @@ class Question < ActiveRecord::Base
   def supports_uploads?
     false
   end
-
 end

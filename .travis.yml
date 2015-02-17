@@ -14,4 +14,4 @@ matrix:
     - rvm: jruby-19mode
     - rvm: rbx-18mode
     - rvm: rbx-19mode
-script: "cd spec/dummy/ && bundle exec rspec"
+script: "cd spec/dummy/ && bundle && bundle exec rspec"

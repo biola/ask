@@ -17,7 +17,7 @@ class FormsController < ApplicationController
   end
 
   def create
-    @form = Form.new(params[:form])
+    @form = Form.new(form_params)
 
     if @form.save
       redirect_to @form, notice: 'Form was successfully created.'
@@ -29,7 +29,7 @@ class FormsController < ApplicationController
   def update
     @form = Form.find(params[:id])
 
-    if @form.update_attributes(params[:form])
+    if @form.update_attributes(form_params)
       redirect_to @form, notice: 'Form was successfully updated.'
     else
       render action: "edit"
@@ -41,6 +41,12 @@ class FormsController < ApplicationController
     @form.destroy
 
     redirect_to forms_url
+  end
+
+  private
+
+  def form_params
+    params.require(:form).permit(:title, {questions_attributes: [:id, :_destroy, :type, :name, :instructions, :required, :position, {choices_attributes: [:id, :_destroy, :name] }] })
   end
 
 end

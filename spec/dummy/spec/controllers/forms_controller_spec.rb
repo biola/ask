@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe FormsController do
+describe FormsController, type: :controller do
   describe 'GET #index' do
     it "renders the :index view" do
       get :index
@@ -48,11 +48,11 @@ describe FormsController do
     context "with valid attributes" do
       it "saves the new form in the database" do
         expect{
-          post :create, form: attributes_for(:form)
+          post :create, form: attributes_for(:form_with_questions)
         }.to change(Form, :count).by(1)
       end
       it "redirects to the home page" do
-        post :create, form: attributes_for(:form)
+        post :create, form: attributes_for(:form_with_questions)
         expect(response).to redirect_to Form.last
       end
     end
