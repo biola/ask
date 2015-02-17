@@ -1,6 +1,6 @@
 jQuery ->
-  ### 
-    Handle adding and removing fields 
+  ###
+    Handle adding and removing fields
   ###
   $('form').on 'click', '.remove_fields', (event) ->
     $(this).prev('input[type=hidden]').val('1')
@@ -16,7 +16,7 @@ jQuery ->
     toggleEditMode new_question
     event.preventDefault()
 
-  ### 
+  ###
     Update the edit preview mode between textQuestion, ChecklistQuestion, etc.
   ###
   updateChoiceVisibility = (select) ->
@@ -32,11 +32,12 @@ jQuery ->
       current_question_type.removeClass('show-radio').addClass('show-checkbox')
     else if select.val() == 'FormSection'
       question.find('.required-option').hide()
-  
+      question.find('.required-option input[type=checkbox]').prop('checked', false)
+
   # Update preview type whenever the user changes the type of this question
   $('form').on "change", ".select-question-type select", ->
     updateChoiceVisibility $(this)
-  
+
   bindTypeChange = (select) ->
 
   # Update once when the DOM first loads
@@ -46,8 +47,8 @@ jQuery ->
     updateChoiceVisibility $(this)
 
 
-  ### 
-    Make the list sortable 
+  ###
+    Make the list sortable
   ###
   makeSortable = ->
     questions = $("form .ask.questions")
