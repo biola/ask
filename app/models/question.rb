@@ -16,6 +16,7 @@ class Question < ActiveRecord::Base
 
   validates_presence_of :type, :name
   validates_inclusion_of :type, :in=>TYPES
+  validate :form_section_not_required
 
   default_scope lambda { order(:position) }
   scope :required, -> { where(:required => true) }
@@ -46,5 +47,13 @@ class Question < ActiveRecord::Base
 
   def supports_uploads?
     false
+  end
+
+  private
+
+  def form_section_not_required
+    if type == 'FormSection' && required?
+      errors.add :required, 'cannot be true for form sections'
+    end
   end
 end
